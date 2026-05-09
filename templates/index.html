@@ -51,7 +51,7 @@
 
       {% endif %}
 
-        <form action="{{url_for('index')}}" method="POST">
+        <form class="inp-form" action="{{url_for('index')}}" method="POST">
           <input type="text" name="content" class="ts-inp" size="30" placeholder="Enter a task..." required />
           <input class="btn" type="submit" value="Add Task" />
         </form>
@@ -86,8 +86,8 @@
 
         </table>
 
-        <form action="/update/{{task.id}}" method="POST">
-          <input type="text" name="content" class="ts-inp" size="30" value="{{task.content}}" required />
+        <form class="inp-form" action="/update/{{task.id}}" method="POST">
+          <input type="text" name="content" class="up-inp" size="30" value="{{task.content}}" required />
           <input class="btn" type="submit" value="Update Text" />
         </form>
 
