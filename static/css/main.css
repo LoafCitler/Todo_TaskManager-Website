@@ -202,7 +202,7 @@ a:hover{
     text-shadow: 3px 3px black;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 500px) {
     body{
         height: 100.9vh;
     }
@@ -282,12 +282,6 @@ a:hover{
         font-size: 12px;
         margin: 3px;
         padding: 6px 8px;
-    }
-
-    .inp-form{
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
     }
 
     .ts-inp,.us-inp{
