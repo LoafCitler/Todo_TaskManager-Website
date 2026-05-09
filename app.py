@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 DatabaseURI=os.getenv("DatabaseURI")
