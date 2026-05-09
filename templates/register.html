@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Register</title>
+
+{% endblock %}
+
+
+{% block body %}
+
+<div class="login-box">
+
+  <h1>Todo Task Manager</h1>
+
+  <form class="sign-box" method="POST" action="{{url_for('register')}}">
+    <div class="input-group">
+        <input type="text" class="custom-input" size="25" id="user" name="user" value="{{user}}" placeholder="Enter User Name" required>
+    </div>
+    <div class="input-group">
+        <input type="password" class="custom-input" size="25" id="password" name="password" value="{{password}}" placeholder="Create Password" minlength="8" required>
+    </div>
+    <div class="button-group">
+        <input type="submit" class="btn sign-up" value="Sign Up">
+    </div>
+    <p class="link">Want to sign in? <a href="/">Click Here!</a></p>
+  </form>
+
+    {% if error %}
+    <div class="error" >
+        <p>{{error}}</p>
+    </div>
+    {% endif %}
+
+  <p class="NOTE">
+    NOTE:- Currently there is no function to change your username or password,
+    so enter it carefully and remember it if you want to access your tasks
+    again.
+  </p>
+
+</div>
+
+{% endblock %}

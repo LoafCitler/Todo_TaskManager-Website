@@ -1,0 +1,107 @@
+{% extends 'base.html' %} 
+
+{% block head %}
+
+<title>To-Do</title>
+
+{% endblock %} 
+
+{% block body %}
+<div class="ind-backg">
+
+  <h1>Todo List</h1>
+  <div class="content">
+
+    {% if not update %}
+
+      {% if tasks|length<=0 %}
+
+      <div class="main">
+
+      <h4>There are no tasks. Create one below!</h4>
+
+      {% else %}
+
+      <div class="main">
+        <table>
+
+          <tr>
+            <th class="task-value">Task</th>
+            <th class="task-date">Added On</th>
+            <th class="task-status">Status</th>
+            <th class="task-actions">Actions</th>
+          </tr>
+
+          {% for task in tasks %}
+          <tr>
+            <td class="task-value">{{ task.content }}</td>
+            <td class="task-date">{{ task.date_created.date() }}</td>
+            <td class="task-status">{{ task.status }}</td>
+            <td class="task-actions">
+              <a class="link-upd" href="/update/{{task.id}}">Update</a>
+              <br />
+              <a class="link-coml" href="/complete/{{task.id}}">Complete</a>
+              <br />
+              <a class="link-del" href="/delete/{{task.id}}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </table>
+
+      {% endif %}
+
+        <form action="{{url_for('index')}}" method="POST">
+          <input type="text" name="content" class="ts-inp" size="30" placeholder="Enter a task..." required />
+          <input class="btn" type="submit" value="Add Text" />
+        </form>
+      </div>
+
+    {% else %}
+
+      <div class="main">
+
+        <table>
+
+          <tr>
+            <th class="task-value">Task</th>
+            <th class="task-date">Added On</th>
+            <th class="task-status">Status</th>
+            <th class="task-actions">Actions</th>
+          </tr>
+          {% for task in tasks %}
+          <tr>
+            <td class="task-value">{{ task.content }}</td>
+            <td class="task-date">{{ task.date_created.date() }}</td>
+            <td class="task-status">{{ task.status }}</td>
+            <td class="task-actions">
+              <a class="link-upd" href="/update/{{task.id}}">Update</a>
+              <br />
+              <a class="link-coml" href="/complete/{{task.id}}">Complete</a>
+              <br />
+              <a class="link-del" href="/delete/{{task.id}}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </table>
+
+        <form action="/update/{{task.id}}" method="POST">
+          <input type="text" name="content" class="ts-inp" size="30" value="{{task.content}}" required />
+          <input class="btn" type="submit" value="Update Text" />
+        </form>
+
+      </div>
+    {% endif %}
+
+    <div class="nt-link">
+      <p class="NOTE">
+        NOTE:- This is just a test website so please DON'T add any important or
+        private information in here
+      </p>
+      <a href="{{ url_for('logout') }}">Press here to logout</a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
