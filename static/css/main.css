@@ -43,7 +43,7 @@ input:-webkit-autofill, /*this is to stop input background change when autofilli
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    color: #c3fadd;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 input{
@@ -286,7 +286,7 @@ a:hover{
 
     .ts-inp,.us-inp{
         font-size: 12px;
-        width: 90%;
+        width: 98.8%;
     }
 
     th{

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
@@ -54,19 +54,19 @@ def validate_username(uname):
 
 @app.route('/',methods=['GET','POST'])
 def login():
-    global tid
     if request.method=='POST':
-        tid=request.form.get('user')
+        user=request.form.get('user')
         password=request.form.get('password')
-        usern=User.query.filter_by(user_name=tid).first()
-        if usern:
-            if bcrypt.check_password_hash(usern.password,password):
-                login_user(usern)
+        session['uid']=user
+        chk_user=User.query.filter_by(user_name=user).first()
+        if chk_user:
+            if bcrypt.check_password_hash(chk_user.password,password):
+                login_user(chk_user)
                 return redirect(url_for('index'))
             else:
-                return render_template('login.html',error="Incorrect password!",uname=tid)
+                return render_template('login.html',error="Incorrect password!",uname=user)
         else:
-                return render_template('login.html',error="User name dosen't exist",uname=tid)
+                return render_template('login.html',error="User name dosen't exist",uname=user)
         
     return render_template('login.html')
 
@@ -74,7 +74,8 @@ def login():
 @app.route('/logout',methods=['GET','POST'])
 @login_required
 def logout():
-    logout_user
+    session.pop('uid', None)
+    logout_user()
     return redirect(url_for('login'))
 
 
@@ -99,20 +100,24 @@ def register():
 
 @app.route("/index",methods=['POST','GET'])
 def index():
-    global tid
-    if request.method=='POST':
-        task_content=request.form['content']
-        new_task=Todo(content=task_content,task_id=tid)
-        try:
-            db.session.add(new_task)
-            db.session.commit()
-            return redirect(url_for('index'))
-        except:
-            return "There was a problem in adding your task"
-            
+    if "uid" in session:
+        uid=session['uid']
+        print(f"uid: {uid}")
+        if request.method=='POST':
+            task_content=request.form['content']
+            new_task=Todo(content=task_content,task_id=uid)
+            try:
+                db.session.add(new_task)
+                db.session.commit()
+                return redirect(url_for('index'))
+            except:
+                return "There was a problem in adding your task"
+                
+        else:
+            tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
+            return render_template('index.html',tasks=tasks)
     else:
-        tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==tid).all()
-        return render_template('index.html',tasks=tasks)
+        return redirect(url_for('login'))
 
 
 @app.route('/delete/<int:id>')
@@ -128,7 +133,7 @@ def delete(id):
 
 @app.route('/update/<int:id>',methods=['GET','POST'])
 def update(id):
-    global tid
+    uid=session.get('uid')
     task=Todo.query.get_or_404(id)
     if request.method=='POST':
         task.content=request.form.get('content')
@@ -139,7 +144,7 @@ def update(id):
         except:
             return 'There was an issue updating your task'
     else:
-        tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==tid).all()
+        tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
         return render_template('index.html', task=task, tasks=tasks, update='UPD')
 
 
