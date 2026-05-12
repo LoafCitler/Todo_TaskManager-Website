@@ -23,7 +23,7 @@ login_manger.login_view="login"
 
 @login_manger.user_loader
 def load_user(user_id):
-    return User.session.get(int(user_id))
+    return User.query.get(int(user_id))
 
 
 class User(db.Model, UserMixin):
@@ -47,7 +47,7 @@ with app.app_context():
 
 
 def validate_username(uname):
-    existing_user_name=User.session.filter_by(user_name=uname).first()
+    existing_user_name=User.query.filter_by(user_name=uname).first()
     if existing_user_name:
         return 2
 
@@ -58,7 +58,7 @@ def login():
         user=request.form.get('user')
         password=request.form.get('password')
         session['uid']=user
-        chk_user=User.session.filter_by(user_name=user).first()
+        chk_user=User.query.filter_by(user_name=user).first()
         if chk_user:
             if bcrypt.check_password_hash(chk_user.password,password):
                 login_user(chk_user)
@@ -114,7 +114,7 @@ def index():
                 return "There was a problem in adding your task"
                 
         else:
-            tasks=Todo.session.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
+            tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
             return render_template('index.html',tasks=tasks)
     else:
         return redirect(url_for('login'))
@@ -122,7 +122,7 @@ def index():
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    task_to_delete=Todo.session.get_or_404(id)
+    task_to_delete=Todo.query.get_or_404(id)
     try:
         db.session.delete(task_to_delete)
         db.session.commit()
@@ -134,7 +134,7 @@ def delete(id):
 @app.route('/update/<int:id>',methods=['GET','POST'])
 def update(id):
     uid=session.get('uid')
-    task=Todo.session.get_or_404(id)
+    task=Todo.query.get_or_404(id)
     if request.method=='POST':
         task.content=request.form.get('content')
         task.status='In Progress'
@@ -144,13 +144,13 @@ def update(id):
         except:
             return 'There was an issue updating your task'
     else:
-        tasks=Todo.session.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
+        tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
         return render_template('index.html', task=task, tasks=tasks, update='UPD')
 
 
 @app.route('/complete/<int:id>',methods=['POST','GET'])
 def complete(id):
-    task_to_complete=Todo.session.get_or_404(id)
+    task_to_complete=Todo.query.get_or_404(id)
     task_to_complete.status='Completed'
     try:
         db.session.commit()
