@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
 
 class Todo(db.Model):
     id=db.Column(db.Integer, primary_key=True)
-    task_id=db.Column(db.String(40))
+    u_id=db.Column(db.String(40))
     content=db.Column(db.String(200), nullable=False)
     status=db.Column(db.String(30), default='In Progress')
     date_created=db.Column(db.DateTime)
@@ -105,7 +105,7 @@ def index():
         print(f"uid: {uid}")
         if request.method=='POST':
             task_content=request.form['content']
-            new_task=Todo(content=task_content,task_id=uid,date_created=datetime.now())
+            new_task=Todo(content=task_content,u_id=uid,date_created=datetime.now())
             try:
                 db.session.add(new_task)
                 db.session.commit()
@@ -114,7 +114,7 @@ def index():
                 return "There was a problem in adding your task"
                 
         else:
-            tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
+            tasks=Todo.query.order_by(Todo.date_created).filter(Todo.u_id==uid).all()
             return render_template('index.html',tasks=tasks)
     else:
         return redirect(url_for('login'))
@@ -145,7 +145,7 @@ def update(id):
         except:
             return 'There was an issue updating your task'
     else:
-        tasks=Todo.query.order_by(Todo.date_created).filter(Todo.task_id==uid).all()
+        tasks=Todo.query.order_by(Todo.date_created).filter(Todo.u_id==uid).all()
         return render_template('index.html', task=task, tasks=tasks, update='UPD')
 
 
