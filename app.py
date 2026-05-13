@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime, timezone
+from datetime import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
@@ -37,7 +37,7 @@ class Todo(db.Model):
     task_id=db.Column(db.String(40))
     content=db.Column(db.String(200), nullable=False)
     status=db.Column(db.String(30), default='In Progress')
-    date_created=db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    date_created=db.Column(db.DateTime)
     
     def __repr__(self):
         return '<Task %r>' % self.id
@@ -105,7 +105,7 @@ def index():
         print(f"uid: {uid}")
         if request.method=='POST':
             task_content=request.form['content']
-            new_task=Todo(content=task_content,task_id=uid)
+            new_task=Todo(content=task_content,task_id=uid,date_created=datetime.now())
             try:
                 db.session.add(new_task)
                 db.session.commit()
@@ -138,6 +138,7 @@ def update(id):
     if request.method=='POST':
         task.content=request.form.get('content')
         task.status='In Progress'
+        task.date_created=datetime.now()
         try:
             db.session.commit()
             return redirect(url_for('index'))
