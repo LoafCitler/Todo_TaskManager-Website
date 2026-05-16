@@ -102,7 +102,6 @@ def register():
 def index():
     if "uid" in session:
         uid=session['uid']
-        print(f"uid: {uid}")
         if request.method=='POST':
             task_content=request.form['content']
             new_task=Todo(content=task_content,u_id=uid,date_created=datetime.now())

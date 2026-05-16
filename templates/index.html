@@ -35,7 +35,7 @@
           {% for task in tasks %}
           <tr>
             <td class="task-value">{{ task.content }}</td>
-            <td class="task-date">{{ task.date_created.strftime('%d-%m-%y %H:%M:%S') }}</td>
+            <td class="task-date">{{ task.date_created.strftime('%d-%m-%y') }}</td> <!--Time formating %H:%M:%S-->
             <td class="task-status">{{ task.status }}</td>
             <td class="task-actions">
               <a class="link-upd" href="/update/{{task.id}}">Update</a>
@@ -72,7 +72,7 @@
           {% for task in tasks %}
           <tr>
             <td class="task-value">{{ task.content }}</td>
-            <td class="task-date">{{ task.date_created.strftime('%d-%m-%y %H:%M:%S') }}</td>
+            <td class="task-date">{{ task.date_created.strftime('%d-%m-%y') }}</td>
             <td class="task-status">{{ task.status }}</td>
             <td class="task-actions">
               <a class="link-upd" href="/update/{{task.id}}">Update</a>
