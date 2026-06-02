@@ -170,6 +170,7 @@ td{
 
 .link-coml{
     color: #49eba7;
+    font-size: 20px;
 }
 
 .link-del{
@@ -264,6 +265,10 @@ a:hover{
 
     .task-status{
         border-right: 2px solid black;
+    }
+
+    .link-coml{
+        font-size: 16px;
     }
 
     .task-actions{
