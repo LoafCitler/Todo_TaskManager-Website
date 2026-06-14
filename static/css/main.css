@@ -311,3 +311,7 @@ a:hover{
         font-size: 20px;
     }
 }
+
+@view-transtion{
+    navigation: auto;
+}
