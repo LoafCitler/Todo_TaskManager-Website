@@ -137,7 +137,6 @@ def update(id):
     if request.method=='POST':
         task.content=request.form.get('content')
         task.status='🔲'
-        task.date_created=datetime.now()
         try:
             db.session.commit()
             return redirect(url_for('index'))
