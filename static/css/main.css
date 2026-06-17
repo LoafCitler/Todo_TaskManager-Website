@@ -20,12 +20,17 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    color: #8ed9ec;
-    background-color: #2b2b2b;
+    gap: 5px;
+    background-color: #000000b4;
+    color: #6dd7f1;
     width: 40vw;
     height: 50vh;
     border-radius: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.login-box h1{
+    margin-bottom: 10px;
 }
 
 .sign-box{
@@ -34,8 +39,11 @@ body{
     align-items: center;
 }
 
+.link{
+    margin: 5px;
+}
+
 .error{
-    /* text-decoration: underline red; */
     border-radius: 16px;
     padding: 5px;
 }
@@ -49,7 +57,7 @@ input:-webkit-autofill:active {
 
 input{
     height: 39px;
-    margin: 5px;
+    margin: 6px;
     padding: 6px 8px;
     border-radius: 16px;
     border: 2px solid black;
@@ -81,7 +89,7 @@ input:hover{
 }
 
 .NOTE{
-    font-weight: bold;
+    font-size: .9rem;
     color: red;
     margin: 5px;
     text-align: center;

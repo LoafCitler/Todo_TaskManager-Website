@@ -8,8 +8,9 @@ import os
 
 load_dotenv()
 DatabaseURI=os.getenv("DatabaseURI")
+HashingSecretKey=os.getenv("HashingSecretKey")
 app = Flask(__name__)
-app.secret_key = 'krptos'
+app.secret_key = f'{HashingSecretKey}'
 app.config['SQLALCHEMY_DATABASE_URI']=f'{DatabaseURI}'
 db=SQLAlchemy()
 db.init_app(app)
