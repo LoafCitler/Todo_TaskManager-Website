@@ -124,7 +124,7 @@ input:hover{
 }
 
 .inp-form{
-    width: clamp(300px, 90vw);
+    width: 80%;
     display: flex;
     caret-color: #00ccff;
 }
@@ -238,10 +238,15 @@ a:hover{
         margin: 0px;
     }
 
+    .ind-backg h1{
+        margin-bottom: 10px;
+    }
+
     .content{
         height: 90%;
         width: 96%;
-        margin: 10px 0px;
+        margin: 0;
+        line-height: 1rem;
     }
 
     .main{
@@ -254,6 +259,10 @@ a:hover{
         width: 100%;
     }
 
+    .inp-form{
+        width: 100%;
+    }
+
     .task-value{
         border-right: 2px solid black;
         width: 60%;
@@ -262,7 +271,7 @@ a:hover{
 
     .task-date{
         border-right: 2px solid black;
-        width: auto;
+        width: clamp(55px, auto, 20%);
     }
 
     .task-status{
@@ -279,31 +288,30 @@ a:hover{
     }
 
     .nt-link,.NOTE{
-        font-size: 10px;
+        font-size: 12px;
         width: 100%;
     }
 
     input{
-        height: 30px;
-        font-size: 10px;
+        height: 1.9rem;
+        font-size: 11px;
         margin: 3px;
         padding: 0px 8px;
     }
 
     .text-inp{
-        font-size: 10px;
-        width: 98.8%;
+        font-size: 11px;
     }
 
     th{
         padding: 2px;
-        font-size: 12px;
-        height: 45px;
+        font-size: 14px;
+        height: 40px;
     }
 
     td{
-        padding: 2px;
-        font-size: 10px;
+        padding: 1px 2px;
+        font-size: 12px;
     }
 
     h1{
