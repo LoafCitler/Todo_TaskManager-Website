@@ -12,9 +12,7 @@
   <h1>Todo List</h1>
   <div class="content">
 
-    {% if not update %}
-
-      {% if tasks|length<=0 %}
+    {% if tasks|length<=0 %}
 
       <div class="main">
 
@@ -27,7 +25,7 @@
 
           <tr>
             <th class="task-value">Task</th>
-            <th class="task-date">Added On</th>
+            <th class="task-date">Date</th>
             <th class="task-status">Status</th>
             <th class="task-actions">Actions</th>
           </tr>
@@ -47,43 +45,19 @@
 
         </table>
 
-      {% endif %}
+    {% endif %}
+    {% if not update %}
 
         <form class="inp-form" action="{{url_for('index')}}" method="POST">
-          <input type="text" name="content" class="ts-inp" size="30" placeholder="Enter a task..." required />
+          <input type="text" name="content" class="text-inp" size="30" placeholder="Enter a task..." required />
           <input class="btn" type="submit" value="Add Task" />
         </form>
       </div>
 
     {% else %}
 
-      <div class="main">
-
-        <table>
-
-          <tr>
-            <th class="task-value">Task</th>
-            <th class="task-date">Added On</th>
-            <th class="task-status">Status</th>
-            <th class="task-actions">Actions</th>
-          </tr>
-          {% for task in tasks %}
-          <tr>
-            <td class="task-value">{{ task.content }}</td>
-            <td class="task-date">{{ task.date_created.strftime('%d-%m-%y') }}</td>
-            <td class="task-status"><a class="link-coml" href="/complete/{{task.id}}">{{ task.status }}</a></td>
-            <td class="task-actions">
-              <a class="link-upd" href="/update/{{task.id}}">Update</a>
-              <br />
-              <a class="link-del" href="/delete/{{task.id}}">Delete</a>
-            </td>
-          </tr>
-          {% endfor %}
-
-        </table>
-
         <form class="inp-form" action="/update/{{task.id}}" method="POST">
-          <input type="text" name="content" class="up-inp" size="30" value="{{task.content}}" required />
+          <input type="text" name="content" class="text-inp" size="30" value="{{task.content}}" required />
           <input class="btn" type="submit" value="Update Text" />
         </form>
 

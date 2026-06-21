@@ -14,16 +14,15 @@
   <h1>Todo Task Manager</h1>
 
   <form class="sign-box"  method="POST" action="{{url_for('login')}}">
-    <div class="input-group">
-        <input type="text" class="custom-input" size="25" id="user" name="user" value="{{uname}}" placeholder="Enter User Name" required>
-    </div>
-    <div class="input-group">
-        <input type="password" class="custom-input" size="25" id="password" name="password" placeholder="Enter Password" minlength="8" required>
-    </div>
-    <div class="button-group">
+
+        <input type="text" class="text-inp" size="25" id="user" name="user" value="{{uname}}" placeholder="Enter User Name" required>
+
+        <input type="password" class="text-inp" size="25" id="password" name="password" placeholder="Enter Password" minlength="8" required>
+
         <input type="submit" class="btn sign-up" value="Sign In">
-    </div>
+
     <p class="link">Dont have an account? <a href="/register">Click Here!</a></p>
+    
   </form>
 
   {% if error %}
