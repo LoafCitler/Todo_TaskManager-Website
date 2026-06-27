@@ -321,5 +321,4 @@ a:hover{
 
 @view-transition{
     navigation: auto;
-    transition: 100ms ease-in-out;
 }
