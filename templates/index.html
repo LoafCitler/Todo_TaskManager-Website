@@ -9,7 +9,7 @@
 {% block body %}
 <div class="ind-backg">
 
-  <h1>Todo List</h1>
+  <h1 class="index-heading">Todo List</h1>
   <div class="content">
 
     {% if tasks|length<=0 %}
@@ -23,18 +23,25 @@
       <div class="main">
         <table>
 
-          <tr>
-            <th class="task-value">Task</th>
+          <tr class="table-head">
+            <th class="task-value" colspan="2">Task</th>
             <th class="task-date">Date</th>
-            <th class="task-status">Status</th>
             <th class="task-actions">Actions</th>
           </tr>
 
           {% for task in tasks %}
           <tr>
-            <td class="task-value">{{ task.content }}</td>
+            <td class="task-status">
+              <a class="link-coml" href="/complete/{{task.id}}">
+              {% if task.status=='Complete' %}
+                <img src="/static/favicon.png">
+              {% else %}
+                <img src="/static/task-status.png">               
+              {% endif %}
+              </a>
+            </td>
+            <td class="task-value tvalue">{{ task.content }}</td>
             <td class="task-date">{{ task.date_created.strftime('%d-%m-%y') }}</td> <!--Time formating %H:%M:%S-->
-            <td class="task-status"><a class="link-coml" href="/complete/{{task.id}}">{{ task.status }}</a></td>
             <td class="task-actions">
               <button id="show-menu"><img src="/static/more.png" alt=""></button>
               <div id="menu">

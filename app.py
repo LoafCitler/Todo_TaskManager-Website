@@ -37,7 +37,7 @@ class Todo(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     u_id=db.Column(db.String(40))
     content=db.Column(db.String(200), nullable=False)
-    status=db.Column(db.String(30), default='🔲')
+    status=db.Column(db.String(30), default='Incomplete')
     date_created=db.Column(db.DateTime)
     
     def __repr__(self):
@@ -137,7 +137,7 @@ def update(id):
     task=Todo.query.get_or_404(id)
     if request.method=='POST':
         task.content=request.form.get('content')
-        task.status='🔲'
+        task.status='Incomplete'
         try:
             db.session.commit()
             return redirect(url_for('index'))
@@ -151,10 +151,10 @@ def update(id):
 @app.route('/complete/<int:id>',methods=['POST','GET'])
 def complete(id):
     task_to_complete=Todo.query.get_or_404(id)
-    if task_to_complete.status=='✅':
-        task_to_complete.status='🔲'
+    if task_to_complete.status=='Complete':
+        task_to_complete.status='Incomplete'
     else:
-        task_to_complete.status='✅'
+        task_to_complete.status='Complete'
     try:
         db.session.commit()
         return redirect(url_for('index'))
