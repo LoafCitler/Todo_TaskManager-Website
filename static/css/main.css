@@ -294,12 +294,16 @@ a:hover{
 
     .task-date{
         border-right: 2px solid black;
-        width: clamp(55px, auto, 20%);
+        width: auto;
     }
 
     .task-status{
-        border-right: 2px solid black;
-        width: auto;
+        width: 8%;
+    }
+
+    img{
+        width: 18px;
+        height: auto;
     }
 
     .link-coml{
