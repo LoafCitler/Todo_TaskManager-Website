@@ -254,8 +254,7 @@ a{
 }
 
 a:hover{
-    color: #9be0bb;
-    text-shadow: 3px 3px black;
+    text-shadow: 3px 3px #9be0bb;
 }
 
 @media screen and (max-width: 750px) {
