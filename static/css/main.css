@@ -157,6 +157,20 @@ table{
     width: 14%;
 }
 
+
+#menu{
+    position: absolute;
+    
+}
+
+#show-menu{
+    position: relative;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .nt-link{
     display: flex;
     flex-direction: column;

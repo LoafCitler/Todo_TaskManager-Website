@@ -36,9 +36,12 @@
             <td class="task-date">{{ task.date_created.strftime('%d-%m-%y') }}</td> <!--Time formating %H:%M:%S-->
             <td class="task-status"><a class="link-coml" href="/complete/{{task.id}}">{{ task.status }}</a></td>
             <td class="task-actions">
-              <a class="link-upd" href="/update/{{task.id}}">Update</a>
-              <br />
-              <a class="link-del" href="/delete/{{task.id}}">Delete</a>
+              <button id="show-menu"><img src="/static/more.png" alt=""></button>
+              <div id="menu">
+                <a class="link-upd" href="/update/{{task.id}}"><img src="/static/refresh.png" alt="Update Icon"></a>
+                <br />
+                <a class="link-del" href="/delete/{{task.id}}"><img src="/static/delete.png" alt="Delete Icon"></a>
+              </div>
             </td>
           </tr>
           {% endfor %}
