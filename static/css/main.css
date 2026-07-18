@@ -237,6 +237,17 @@ td{
     color: #d43131;
 }
 
+.link-upd, .link-del{
+    margin: 2px;
+    padding: 6px 8px;
+    border-radius: 12px;
+    border: 2px solid black;
+    background-color: #c3fadd;
+    transition: 160ms ease-in-out;
+    width: clamp(20%, 90%);
+    font-size: 16px;
+}
+
 .link-upd:hover{
     color: #48c2e0;
     text-shadow: 1px 1px #216779;
